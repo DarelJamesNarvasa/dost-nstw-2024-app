@@ -58,9 +58,15 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   late MapShapeSource _dataSource;
   late List<MapModel> _mapData;
+  late List<MarkerModel> _markerData;
+
 
   @override
   void initState() {
+    _markerData = const <MarkerModel>[
+      MarkerModel('Region X (Northern Mindanao)', 8.5014864, 124.6545035)
+    ];
+
     _mapData = _getMapData();
     _dataSource = MapShapeSource.asset(
       'assets/philippines.json',
@@ -91,6 +97,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   MapShapeLayer(
                     source: _dataSource,
                     showDataLabels: true,
+                    initialMarkersCount: 1,
+                    markerBuilder: (BuildContext context, int index){
+                      return MapMarker(
+                        latitude: _markerData[index].latitude,
+                        longitude: _markerData[index].longitude,
+                        iconColor: Colors.deepOrange,
+                      );
+                    },
                   ),
                 ],
               ),
@@ -128,4 +142,12 @@ class MapModel {
   String state;
   String stateCode;
   Color color;
+}
+
+class MarkerModel {
+  const MarkerModel(this.country, this.latitude, this.longitude);
+
+  final String country;
+  final double latitude;
+  final double longitude;
 }
