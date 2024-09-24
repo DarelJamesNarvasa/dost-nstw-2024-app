@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class LanaoDelNortePage extends StatefulWidget {
+class IlocosNortePage extends StatefulWidget {
   @override
-  _LanaoDelNortePageState createState() => _LanaoDelNortePageState();
+  _IlocosNortePageState createState() => _IlocosNortePageState();
 }
 
-class _LanaoDelNortePageState extends State<LanaoDelNortePage> {
+class _IlocosNortePageState extends State<IlocosNortePage> {
   late VideoPlayerController _controller;
 
   @override
@@ -40,7 +40,7 @@ class _LanaoDelNortePageState extends State<LanaoDelNortePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'DOST REGION X LANAO DEL NORTE',
+          'DOST REGION I ILOCOS NORTE',
           style: TextStyle(
             fontFamily: 'Roboto',
             //fontSize: 22,
@@ -48,8 +48,7 @@ class _LanaoDelNortePageState extends State<LanaoDelNortePage> {
             //color: Colors.blueAccent,
           ),
         ),
-        //backgroundColor: Color(0xFF99cc33), // AppBar background color
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFF99cc33), // AppBar background color
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 16.0), // Add right margin here
@@ -65,7 +64,7 @@ class _LanaoDelNortePageState extends State<LanaoDelNortePage> {
         ],
       ),
 
-      backgroundColor: Colors.white, // Set background color to black
+      backgroundColor: Colors.black,  // Set background color to black
       //backgroundColor: Color(0xFF00aceb), // Set background color to black
       body: Center(
         child: Column(
