@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
+import 'lanao_del_norte.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -394,11 +396,29 @@ class _MyHomePageState extends State<MyHomePage> {
             children: provinces.map((province) {
               return ElevatedButton(
                 onPressed: () {
-                  // Action for each province button
-                  Navigator.of(context).pop();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('You selected $province')),
-                  );
+                  Navigator.of(context).pop(); // Close the dialog
+
+                  // Navigate to a specific page based on the province name
+                  if (province == 'Lanao del Norte') {
+                    Navigator.push(
+                      context,
+                      //MaterialPageRoute(builder: (context) => LanaoDelNortePage()),
+                      MaterialPageRoute(builder: (context) => LanaoDelNortePage()),
+                    );
+                  } else if (province == 'Ilocos Norte') {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => IlocosNortePage()),
+                    );
+                  } else {
+                    // Default page for other provinces
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProvincePage(provinceName: province),
+                      ),
+                    );
+                  }
                 },
                 child: Text(province),
               );
@@ -453,4 +473,44 @@ class MarkerModel {
   final String country;
   final double latitude;
   final double longitude;
+}
+
+
+// Ilocos Norte page
+class IlocosNortePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Ilocos Norte')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: const [
+            Text('Welcome to Ilocos Norte', style: TextStyle(fontSize: 28)),
+            SizedBox(height: 20),
+            Text('This is the description for Ilocos Norte', style: TextStyle(fontSize: 16)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Default province page
+class ProvincePage extends StatelessWidget {
+  final String provinceName;
+
+  const ProvincePage({Key? key, required this.provinceName}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(provinceName),
+      ),
+      body: Center(
+        child: Text('Welcome to $provinceName!', style: const TextStyle(fontSize: 24)),
+      ),
+    );
+  }
 }
