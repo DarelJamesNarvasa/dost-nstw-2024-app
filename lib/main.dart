@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
-import 'lanao_del_norte.dart';
+import 'provinces/lanao_del_norte.dart';
 
 void main() {
   runApp(const MyApp());
