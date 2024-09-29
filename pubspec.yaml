@@ -65,8 +65,10 @@ flutter:
     - assets/videos/1_minute_DOST-X.mp4
     - assets/background/BG-11.png
     - assets/background/elements-12.png
-    - assets/background/2024-NSTW-BLK-09.png
+    - assets/logo/2024-NSTW-BLK-09.png
     - assets/logo/DOST_BAGONGSILANG_LOGO.png
+    - assets/logo/DOST_Logo.png
+    - assets/logo/bagong-pilipnas-logo.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

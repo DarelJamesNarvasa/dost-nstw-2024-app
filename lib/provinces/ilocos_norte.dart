@@ -48,7 +48,8 @@ class _IlocosNortePageState extends State<IlocosNortePage> {
             //color: Colors.blueAccent,
           ),
         ),
-        backgroundColor: Color(0xFF99cc33), // AppBar background color
+        //backgroundColor: Color(0xFF99cc33), // AppBar background color
+        backgroundColor: Colors.white,
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 16.0), // Add right margin here
@@ -64,7 +65,7 @@ class _IlocosNortePageState extends State<IlocosNortePage> {
         ],
       ),
 
-      backgroundColor: Colors.black,  // Set background color to black
+      backgroundColor: Colors.white,  // Set background color to black
       //backgroundColor: Color(0xFF00aceb), // Set background color to black
       body: Center(
         child: Column(

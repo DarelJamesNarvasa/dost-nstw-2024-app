@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
+import 'buttons/legend_popup.dart';
+
 import 'provinces/lanao_del_norte.dart';
 import 'provinces/ilocos_norte.dart';
 
@@ -198,6 +200,101 @@ class _MyHomePageState extends State<MyHomePage> {
     'Tawi‑Tawi'
   ];
 
+  // Define your legend items
+  final legendItems = [
+    LegendItem(color: Color(0xFF0087D1), text: 'Region I'),
+    LegendItem(color: Color(0xFF356ec8), text: 'Region II'),
+    LegendItem(color: Color(0xFF092e72), text: 'Region III'),
+    LegendItem(color: Color(0xFF2374a8), text: 'Region IV'),
+    LegendItem(color: Color(0xFF2677a6), text: 'Region V'),
+    LegendItem(color: Color(0xFF2375a7), text: 'Region VI'),
+    LegendItem(color: Color(0xFF053171), text: 'Region VII'),
+    LegendItem(color: Color(0xFF00A9E0), text: 'Region VIII'),
+    LegendItem(color: Color(0xFF092e72), text: 'Region IX'),
+    LegendItem(color: Color(0xFF4da2e5), text: 'Region X'),
+    LegendItem(color: Color(0xFF00A9E0), text: 'Region XI'),
+    LegendItem(color: Color(0xFF2375a7), text: 'Region XII'),
+    LegendItem(color: Color(0xFF1d79ab), text: 'Region XIII'),
+    LegendItem(color: Color(0xFF38cfe0), text: 'Cordillera Administrative Region'),
+    LegendItem(color: Color(0xFF6fafc4), text: 'National Capital Region'),
+    LegendItem(color: Color(0xFF17336a), text: 'MIMAROPA Region'),
+    LegendItem(color: Color(0xFF2ed4e2), text: 'Bangsamoro Autonomous Region In Muslim Mindanao'),
+  ];
+
+  // Function to show the custom popup menu at a fixed position
+  void _showCustomPopupMenu(BuildContext context) async {
+    // Define a fixed position for the popup menu
+    double fixedXPosition = 80; // Change this value to set the desired horizontal position
+    double fixedYPosition = 80;   // Change this value to set the desired vertical position
+
+    await showMenu(
+      color: Colors.white,
+      context: context,
+      position: RelativeRect.fromLTRB(
+        fixedXPosition,
+        fixedYPosition,
+        fixedXPosition,
+        fixedYPosition,
+      ),
+      items: [
+        PopupMenuItem(
+          child: Container(
+            height: 500, // Adjust this value to set the total height of the popup menu
+            width: 200, // Adjust the width to fit the text
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start, // Align the items to the start
+                children: [
+                  // Center the title
+                  Center(
+                    child: Text(
+                      'Map Legend',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Divider(
+                    color: Colors.black, // Color of the divider
+                    thickness: 1, // Thickness of the line
+                  ),
+                  // Generate the legend items dynamically
+                  Column(
+                    children: legendItems.map((item) {
+                      return Container(
+                        padding: EdgeInsets.symmetric(vertical: 8.0), // Add some vertical padding
+                        height: 50, // Set individual item height
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 15, // Width of the color box
+                              height: 15, // Height of the color box
+                              color: item.color, // Show the legend color box
+                              margin: EdgeInsets.only(right: 12),
+                            ),
+                            Expanded(
+                              child: Text(
+                                item.text, // Show the legend text
+                                overflow: TextOverflow.ellipsis, // Handle text overflow if it's too long
+                                style: TextStyle(fontSize: 14), // Adjust text size
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   void initState() {
     _markerData = const <MarkerModel>[
@@ -221,7 +318,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     _zoomPanBehavior = MapZoomPanBehavior(
-      maxZoomLevel: 2, // limit for map zoom
+      maxZoomLevel: 2.5, // Adjust the zoom level for the map
     );
     _mapData = _getMapData();
     _dataSource = MapShapeSource.asset(
@@ -238,183 +335,265 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(children: <Widget>[
-
-        /*
-        Padding(
-          padding: EdgeInsets.fromLTRB(0, 50, 0, 0),
-          child: Container(
-            width: double.infinity, // This makes the box take the full width of the parent
-            color: Colors.blueAccent, // Set your desired background color
-            padding: EdgeInsets.all(16), // Padding inside the box for spacing around the text
-            child: Text(
-              'Philippine Map',
-              style: TextStyle(color: Colors.white, fontSize: 20), // Text color should contrast with the background
-              textAlign: TextAlign.center, // Center the text
-            ),
+      body: Stack(
+        children: <Widget>[
+          // Background Image covering the entire screen
+          Image.asset(
+            'assets/background/BG-11.png', // Path to your background image
+            fit: BoxFit.cover,             // Makes the image cover the entire background
+            width: double.infinity,        // Ensure image covers the width of the screen
+            height: double.infinity,       // Ensure image covers the height of the screen
           ),
-        ),
-         */
-        Expanded(
-            child: Stack(
-              children: <Widget>[
-                Image.asset(
-                  'assets/background/BG-11.png', // Path to your background image
-                  fit: BoxFit.cover,             // Makes the image cover the entire background
-                  width: double.infinity,        // Ensure image covers the width of the screen
-                  height: double.infinity,       // Ensure image covers the height of the screen
-                ),
-                Positioned(
-                  top: -80, // Adjust the top value to remove extra space
-                  right: 10,
-                  child: Container(
-                    width: 350, // Adjust the width of the logo
-                    height: 350, // Adjust the height of the logo
-                    child: Image.asset(
-                      'assets/logo/DOST_BAGONGSILANG_LOGO.png', // Path to your logo image
-                      fit: BoxFit.contain, // This ensures the image fits within the container without scaling beyond its size
+
+          // Legend Button
+          Positioned(
+            top: 30,
+            left: 30, // Position your legend button
+            child: GestureDetector(
+              onTapDown: (details) {
+                //_showCustomPopupMenu(context, details.globalPosition);
+                _showCustomPopupMenu(context);
+              },
+              child: Container(
+                width: 50,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: (){
+                    // Define your button action here
+                    //_showCustomPopupMenu(context, Offset(100, 70)); // Example offset for the popup
+                    _showCustomPopupMenu(context);
+                  }, // Handled by GestureDetector
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.white, // Set background color to blue
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25), // Optional: Customize the shape
+                    ),
+                  ),
+                  child: Text(
+                    'i', // Button text
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.black,
+                      //fontWeight: FontWeight.bold
                     ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.all(15),
-                  child: SfMaps(
-                    layers: [
-                      MapShapeLayer(
-                        source: _dataSource,
-                        zoomPanBehavior: _zoomPanBehavior,
-                        showDataLabels: true,
-                        initialMarkersCount: 17,
-                        markerBuilder: (BuildContext context, int index) {
-                          return MapMarker(
-                            latitude: _markerData[index].latitude,
-                            longitude: _markerData[index].longitude,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                if (_markerData[index].country == 'Region X (Northern Mindanao)') {
-                                  _showProvinceDialog(context, 'Region X (Northern Mindanao)', region10Provinces);
-                                } else if (_markerData[index].country == 'Region XI (Davao Region)') {
-                                  _showProvinceDialog(context, 'Region XI (Davao Region)', region11Provinces);
-                                }else if(_markerData[index].country == 'Region IX (Zamboanga Peninsula)') {
-                                  _showProvinceDialog(context, 'Region IX (Zamboanga Peninsula)', region9Provinces);
-                                }else if(_markerData[index].country == 'Region XII (SOCCSKSARGEN)') {
-                                  _showProvinceDialog(context, 'Region XII (SOCCSKSARGEN)', region12Provinces);
-                                } else if(_markerData[index].country == 'Region XIII (Caraga)') {
-                                  _showProvinceDialog(context, 'Region XIII (Caraga)', region13Provinces);
-                                } else if(_markerData[index].country == 'Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)') {
-                                  _showProvinceDialog(context, 'Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)', barmmProvinces);
-                                } else if(_markerData[index].country == 'Region VIII (Eastern Visayas)') {
-                                  _showProvinceDialog(context, 'Region VIII (Eastern Visayas)', region8Provinces);
-                                } else if(_markerData[index].country == 'Region VII (Central Visayas)') {
-                                  _showProvinceDialog(context, 'Region VII (Central Visayas)', region7Provinces);
-                                } else if(_markerData[index].country == 'Region VI (Western Visayas)') {
-                                  _showProvinceDialog(context, 'Region VI (Western Visayas)', region6Provinces);
-                                } else if(_markerData[index].country == 'MIMAROPA Region') {
-                                  _showProvinceDialog(context, 'MIMAROPA Region', mimaropaProvinces);
-                                } else if(_markerData[index].country == 'Region V (Bicol Region)') {
-                                  _showProvinceDialog(context, 'Region V (Bicol Region)', region5Provinces);
-                                } else if(_markerData[index].country == 'Region IV-A (CALABARZON)') {
-                                  _showProvinceDialog(context, 'Region IV-A (CALABARZON)', region4Provinces);
-                                } else if(_markerData[index].country == 'National Capital Region (NCR)') {
-                                  _showProvinceDialog(context, 'National Capital Region (NCR)', ncrProvinces);
-                                } else if(_markerData[index].country == 'Region III (Central Luzon)') {
-                                  _showProvinceDialog(context, 'Region III (Central Luzon)', region3Provinces);
-                                } else if(_markerData[index].country == 'Region II (Cagayan Valley)') {
-                                  _showProvinceDialog(context, 'Region II (Cagayan Valley)', region2Provinces);
-                                } else if(_markerData[index].country == 'Cordillera Administrative Region (CAR)') {
-                                  _showProvinceDialog(context, 'Cordillera Administrative Region (CAR)', carProvinces);
-                                } else if(_markerData[index].country == 'Region I (Ilocos Region)') {
-                                  _showProvinceDialog(context, 'Region I (Ilocos Region)', region1Provinces);
-                                }
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: _markerData[index].country == 'Region X (Northern Mindanao)'
-                                    ? const Color(0xFF4da2e5)
-                                    : _markerData[index].country == 'Region XI (Davao Region)'
-                                    ? const Color(0xFF00A9E0)
-                                    : _markerData[index].country == 'Region IX (Zamboanga Peninsula)'
-                                    ? const Color(0xFF092e72)
-                                    : _markerData[index].country == 'Region XII (SOCCSKSARGEN)'
-                                    ? const Color(0xFF2375a7)
-                                    : _markerData[index].country == 'Region XIII (Caraga)'
-                                    ? const Color(0xFF1d79ab)
-                                    : _markerData[index].country == 'Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)'
-                                    ? const Color(0xFF2ed4e2)
-                                    : _markerData[index].country == 'Region VIII (Eastern Visayas)'
-                                    ? const Color(0xFF00A9E0)
-                                    : _markerData[index].country == 'Region VII (Central Visayas)'
-                                    ? const Color(0xFF053171)
-                                    : _markerData[index].country == 'Region VI (Western Visayas)'
-                                    ? const Color(0xFF2375a7)
-                                    : _markerData[index].country == 'MIMAROPA Region'
-                                    ? const Color(0xFF17336a)
-                                    : _markerData[index].country == 'Region V (Bicol Region)'
-                                    ? const Color(0xFF2677a6)
-                                    : _markerData[index].country == 'Region IV-A (CALABARZON)'
-                                    ? const Color(0xFF2374a8)
-                                    : _markerData[index].country == 'National Capital Region (NCR)'
-                                    ? const Color(0xFF6fafc4)
-                                    : _markerData[index].country == 'Region III (Central Luzon)'
-                                    ? const Color(0xFF092e72)
-                                    : _markerData[index].country == 'Region II (Cagayan Valley)'
-                                    ? const Color(0xFF356ec8)
-                                    : _markerData[index].country == 'Cordillera Administrative Region (CAR)'
-                                    ? const Color(0xFF38cfe0)
-                                    : _markerData[index].country == 'Region I (Ilocos Region)'
-                                    ? Color(0xFF0087D1)
-                                    : const Color(0xFF4da2e5),  // Default color
-                                shape: const CircleBorder(),
-                                padding: const EdgeInsets.all(0),  // Smaller padding for smaller button
-                                minimumSize: const Size(0, 0),  // Reduce button size
-                              ),
-                              child: const Icon(
-                                Icons.location_on,
-                                //Icons.pin_drop,
-                                color: Colors.white,
-                                //color: Color(0xFF71b300),
-                                //size: 24,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            )
-        ),
-
-        Container(
-          width: double.infinity, // This makes the box take the full width of the parent
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/background/elements-12.png'), // Update with the path to your background image
-              fit: BoxFit.cover, // Adjust how the image fits the container
+              ),
             ),
           ),
-          padding: EdgeInsets.all(16), // Padding inside the box for spacing around the image
-          child: Row(
-            children: [
-              // Add your image heres
-              Container(
-                width: 80, // Adjust the width of your image container as needed
-                height: 50, // Adjust the height of your image container as needed
-                child: Image.asset(
-                  'assets/background/2024-NSTW-BLK-09.png', // Update with the correct path to your image
-                  fit: BoxFit.cover, // Adjust how the image fits within its container
-                ),
+
+
+          // Philippines Maps
+          Positioned.fill(
+            top: -170,
+            child: Padding(
+              padding: EdgeInsets.only(top: 150),
+              child: Column(
+                children: <Widget>[
+                  // Container for the images and circle at the top
+                  Positioned(
+                    //top: 0, // Adjust the top value as needed
+                    left: MediaQuery.of(context).size.width / 2 - 150, // Center the container by calculating the position
+                    child: Container(
+                      width: 300, // Fixed width for the image container (box)
+                      alignment: Alignment.center, // Centers the container horizontally
+                      color: Colors.white.withOpacity(0.1), // Set background color for the box
+                      padding: EdgeInsets.all(0), // Padding inside the box
+                      child: Stack( // Use Stack to layer the blue rectangle behind other widgets
+                        children: [
+                          // Blue Rectangle Container inside the main container
+                          Container(
+                            width: 300, // Match the width of the main container
+                            height: 80, // Adjust the height as needed
+                            decoration: BoxDecoration(
+                              //color: Colors.blue, // Set the background color to blue
+                              color: Color(0xFF99cc33),
+                              borderRadius: BorderRadius.only( // Specify which corners to round
+                                bottomLeft: Radius.circular(20.0), // Adjust the radius as needed
+                                bottomRight: Radius.circular(20.0), // Adjust the radius as needed
+                              ),
+                            ),// Set the background color to blue
+                          ),
+
+                          // Row for the logos and circle
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround, // Use spaceAround or spaceEvenly to evenly distribute space
+                            children: <Widget>[
+                              // First Image (DOST Logo on the left)
+                              Transform.translate(
+                                offset: Offset(0, -12), // Move the logo up by 5 pixels
+                                child: Image.asset(
+                                  'assets/logo/DOST_Logo.png',
+                                  width: 50,
+                                  height: 50, // Set size for the first image
+                                ),
+                              ),
+
+                              // Circle in the middle with another logo inside
+                              Container(
+                                width: 120, // Adjust width of the circle if needed
+                                height: 120, // Adjust height of the circle if needed
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF99cc33), // Background color of the circle
+                                  shape: BoxShape.circle, // Shape the container into a circle
+                                  border: Border.all(color: Color(0xFF99cc33), width: 2), // Optional: Circle border
+                                ),
+                                child: Center(
+                                  child: Image.asset(
+                                    'assets/logo/2024-NSTW-BLK-09.png', // Path to the logo inside the circle
+                                    width: 110,
+                                    height: 110, // Set size for the image inside the circle
+                                    fit: BoxFit.contain, // Ensures the image fits within the circle
+                                  ),
+                                ),
+                              ),
+
+                              // Second Image (Bagong Pilipinas Logo on the right)
+                              Transform.translate(
+                                offset: Offset(0, -12), // Move the logo up by 5 pixels
+                                child: Image.asset(
+                                  'assets/logo/bagong-pilipnas-logo.png', // Path to the second local image
+                                  width: 55,
+                                  height: 55, // Set size for the second image
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  Expanded(
+                    child: SfMaps(
+                        layers: [
+                          MapShapeLayer(
+                            source: _dataSource,
+                            zoomPanBehavior: _zoomPanBehavior,
+                            showDataLabels: true,
+                            initialMarkersCount: 17,
+                            markerBuilder: (BuildContext context, int index) {
+                              return MapMarker(
+                                latitude: _markerData[index].latitude,
+                                longitude: _markerData[index].longitude,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    if (_markerData[index].country == 'Region X (Northern Mindanao)') {
+                                      _showProvinceDialog(context, 'Region X', region10Provinces);
+                                    } else if (_markerData[index].country == 'Region XI (Davao Region)') {
+                                      _showProvinceDialog(context, 'Region XI', region11Provinces);
+                                    }else if(_markerData[index].country == 'Region IX (Zamboanga Peninsula)') {
+                                      _showProvinceDialog(context, 'Region IX', region9Provinces);
+                                    }else if(_markerData[index].country == 'Region XII (SOCCSKSARGEN)') {
+                                      _showProvinceDialog(context, 'Region XII', region12Provinces);
+                                    } else if(_markerData[index].country == 'Region XIII (Caraga)') {
+                                      _showProvinceDialog(context, 'Region XIII', region13Provinces);
+                                    } else if(_markerData[index].country == 'Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)') {
+                                      _showProvinceDialog(context, 'Bangsamoro Autonomous Region In Muslim Mindanao', barmmProvinces);
+                                    } else if(_markerData[index].country == 'Region VIII (Eastern Visayas)') {
+                                      _showProvinceDialog(context, 'Region VIII', region8Provinces);
+                                    } else if(_markerData[index].country == 'Region VII (Central Visayas)') {
+                                      _showProvinceDialog(context, 'Region VII', region7Provinces);
+                                    } else if(_markerData[index].country == 'Region VI (Western Visayas)') {
+                                      _showProvinceDialog(context, 'Region VI', region6Provinces);
+                                    } else if(_markerData[index].country == 'MIMAROPA Region') {
+                                      _showProvinceDialog(context, 'MIMAROPA Region', mimaropaProvinces);
+                                    } else if(_markerData[index].country == 'Region V (Bicol Region)') {
+                                      _showProvinceDialog(context, 'Region V', region5Provinces);
+                                    } else if(_markerData[index].country == 'Region IV-A (CALABARZON)') {
+                                      _showProvinceDialog(context, 'Region IV', region4Provinces);
+                                    } else if(_markerData[index].country == 'National Capital Region (NCR)') {
+                                      _showProvinceDialog(context, 'National Capital Region', ncrProvinces);
+                                    } else if(_markerData[index].country == 'Region III (Central Luzon)') {
+                                      _showProvinceDialog(context, 'Region III', region3Provinces);
+                                    } else if(_markerData[index].country == 'Region II (Cagayan Valley)') {
+                                      _showProvinceDialog(context, 'Region II', region2Provinces);
+                                    } else if(_markerData[index].country == 'Cordillera Administrative Region (CAR)') {
+                                      _showProvinceDialog(context, 'Cordillera Administrative Region', carProvinces);
+                                    } else if(_markerData[index].country == 'Region I (Ilocos Region)') {
+                                      _showProvinceDialog(context, 'Region I', region1Provinces);
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: _markerData[index].country == 'Region X (Northern Mindanao)'
+                                        ? const Color(0xFF4da2e5)
+                                        : _markerData[index].country == 'Region XI (Davao Region)'
+                                        ? const Color(0xFF00A9E0)
+                                        : _markerData[index].country == 'Region IX (Zamboanga Peninsula)'
+                                        ? const Color(0xFF092e72)
+                                        : _markerData[index].country == 'Region XII (SOCCSKSARGEN)'
+                                        ? const Color(0xFF2375a7)
+                                        : _markerData[index].country == 'Region XIII (Caraga)'
+                                        ? const Color(0xFF1d79ab)
+                                        : _markerData[index].country == 'Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)'
+                                        ? const Color(0xFF2ed4e2)
+                                        : _markerData[index].country == 'Region VIII (Eastern Visayas)'
+                                        ? const Color(0xFF00A9E0)
+                                        : _markerData[index].country == 'Region VII (Central Visayas)'
+                                        ? const Color(0xFF053171)
+                                        : _markerData[index].country == 'Region VI (Western Visayas)'
+                                        ? const Color(0xFF2375a7)
+                                        : _markerData[index].country == 'MIMAROPA Region'
+                                        ? const Color(0xFF17336a)
+                                        : _markerData[index].country == 'Region V (Bicol Region)'
+                                        ? const Color(0xFF2677a6)
+                                        : _markerData[index].country == 'Region IV-A (CALABARZON)'
+                                        ? const Color(0xFF2374a8)
+                                        : _markerData[index].country == 'National Capital Region (NCR)'
+                                        ? const Color(0xFF6fafc4)
+                                        : _markerData[index].country == 'Region III (Central Luzon)'
+                                        ? const Color(0xFF092e72)
+                                        : _markerData[index].country == 'Region II (Cagayan Valley)'
+                                        ? const Color(0xFF356ec8)
+                                        : _markerData[index].country == 'Cordillera Administrative Region (CAR)'
+                                        ? const Color(0xFF38cfe0)
+                                        : _markerData[index].country == 'Region I (Ilocos Region)'
+                                        ? Color(0xFF0087D1)
+                                        : const Color(0xFF4da2e5),  // Default color
+                                    shape: const CircleBorder(),
+                                    padding: const EdgeInsets.all(0),  // Smaller padding for smaller button
+                                    minimumSize: const Size(0, 0),  // Reduce button size
+                                  ),
+
+                                  child: const Icon(
+                                    Icons.location_on,
+                                    //Icons.pin_drop,
+                                    color: Colors.white,
+                                    //color: Color(0xFF71b300),
+                                    //size: 24,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ]),
+                    ),
+                    Container(
+                      width: 800, // Full width of the screen
+                      height: 50, // Adjust the height as needed
+                      decoration: BoxDecoration(
+                        color: Color(0xFF99cc33), // Background color for the new box
+                        borderRadius: BorderRadius.only( // Specify which corners to round
+                          topLeft: Radius.circular(50.0), // Adjust the radius as needed
+                          topRight: Radius.circular(50.0), // Adjust the radius as needed
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Title Page', // Title Page
+                          style: TextStyle(fontSize: 20, color: Colors.black),
+                        ),
+                      ),
+                    ),
+                ],
               ),
-              // Optionally, add some space between the image and the container's edge
-              SizedBox(width: 10), // Adjust the space as needed
-              // You can add more widgets here if needed
-            ],
+            ),
           ),
-        ),
-      ],
+        ],
       ),
     );
   }
+
 
   // Function to display a list of provinces for each region
   void _showProvinceDialog(BuildContext context, String regionName, List<String> provinces) {
@@ -422,16 +601,17 @@ class _MyHomePageState extends State<MyHomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: const Color(0xFFFAFAFA), // Set the dialog background color to #FAFAFA
           title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start, // Keep the region name left-aligned
+            crossAxisAlignment: CrossAxisAlignment.center, // Aligns the region name to the center
             children: [
-              Text(regionName), // Left-aligned region name
-              SizedBox(height: 8), // Add some spacing
               Center(
-                child: Text( // Center the "Provinces" text
-                  'Provinces',
-                  textAlign: TextAlign.center,
-                ),
+                child: Text(regionName), // Centered region name
+              ),
+              const SizedBox(height: 8), // Add some spacing
+              const Divider(
+                thickness: 2,    // Set the thickness of the divider
+                color: Colors.black, // Set the divider color to black
               ),
             ],
           ),
@@ -444,6 +624,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     width: 200,  // Set a fixed width
                     height: 50,  // Set a fixed height
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        foregroundColor: Colors.black, // Set button text color to black
+                        backgroundColor: Colors.white, // Set button background color to white
+                        shadowColor: Colors.black, // Set shadow color to black
+                        elevation: 5, // Set the elevation for shadow effect
+                        shape: RoundedRectangleBorder( // Adjust round corners
+                          borderRadius: BorderRadius.circular(20), // Set the radius for rounded corners
+                        ),
+                      ),
                       onPressed: () {
                         Navigator.of(context).pop(); // Close the dialog
 
@@ -463,13 +652,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: Text(province),
                     ),
                   ),
-                  SizedBox(height: 10), // Add space between buttons
+                  const SizedBox(height: 10), // Add space between buttons
                 ],
               );
             }).toList(),
           ),
           actions: [
             TextButton(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.black, // Set the "Close" button text color to black
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -480,6 +672,12 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
+
+
+
+
+
+
 
   // Map Colors
   static List<MapModel> _getMapData(){
