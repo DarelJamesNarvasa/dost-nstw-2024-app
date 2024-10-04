@@ -1,10 +1,122 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
-
 import 'buttons/legend_popup.dart';
 
-import 'provinces/lanao_del_norte.dart';
-import 'provinces/ilocos_norte.dart';
+// Region-I
+import 'provinces/region-i/ilocos_norte.dart';
+import 'provinces/region-i/ilocos_sur.dart';
+import 'provinces/region-i/la_union.dart';
+import 'provinces/region-i/pangasinan.dart';
+
+// CAR
+import 'provinces/car/abra.dart';
+import 'provinces/car/apayao.dart';
+import 'provinces/car/benguet.dart';
+import 'provinces/car/ifugao.dart';
+import 'provinces/car/kalinga.dart';
+import 'provinces/car/mountain_province.dart';
+
+// Region II
+import 'provinces/region-ii/batanes.dart';
+import 'provinces/region-ii/cagayan.dart';
+import 'provinces/region-ii/isabela.dart';
+import 'provinces/region-ii/nueva_vizcaya.dart';
+import 'provinces/region-ii/quirino.dart';
+
+// Region III
+import 'provinces/region-iii/aurora.dart';
+import 'provinces/region-iii/bataan.dart';
+import 'provinces/region-iii/bulacan.dart';
+import 'provinces/region-iii/nueva_ecija.dart';
+import 'provinces/region-iii/pampanga.dart';
+import 'provinces/region-iii/tarlac.dart';
+import 'provinces/region-iii/zambales.dart';
+
+// NCR
+import 'provinces/ncr/ncr.dart';
+
+// Region IV
+import 'provinces/region-iv/batangas.dart';
+import 'provinces/region-iv/cavite.dart';
+import 'provinces/region-iv/laguna.dart';
+import 'provinces/region-iv/quezon.dart';
+import 'provinces/region-iv/rizal.dart';
+
+// Region V
+import 'provinces/region-v/albay.dart';
+import 'provinces/region-v/camarines_norte.dart';
+import 'provinces/region-v/camarines_sur.dart';
+import 'provinces/region-v/catanduanes.dart';
+import 'provinces/region-v/masbate.dart';
+import 'provinces/region-v/sorsogon.dart';
+
+// Mimaropa
+import 'provinces/mimaropa/marinduque.dart';
+import 'provinces/mimaropa/occidental_mindoro.dart';
+import 'provinces/mimaropa/oriental_mindoro.dart';
+import 'provinces/mimaropa/palawan.dart';
+import 'provinces/mimaropa/romblon.dart';
+
+// Region VI
+import 'provinces/region-vi/aklan.dart';
+import 'provinces/region-vi/antique.dart';
+import 'provinces/region-vi/capiz.dart';
+import 'provinces/region-vi/guimaras.dart';
+import 'provinces/region-vi/iloilo.dart';
+import 'provinces/region-vi/negros_occidental.dart';
+
+// Region VII
+import 'provinces/region-vii/bohol.dart';
+import 'provinces/region-vii/cebu.dart';
+import 'provinces/region-vii/negros_oriental.dart';
+import 'provinces/region-vii/siquijor.dart';
+
+// Regin VIII
+import 'provinces/region-viii/biliran.dart';
+import 'provinces/region-viii/eastern_samar.dart';
+import 'provinces/region-viii/leyte.dart';
+import 'provinces/region-viii/northern_samar.dart';
+import 'provinces/region-viii/samar.dart';
+import 'provinces/region-viii/southern_leyte.dart';
+
+// Region IX
+import 'provinces/region-ix/zamboanga_del_norte.dart';
+import 'provinces/region-ix/zamboanga_del_sur.dart';
+import 'provinces/region-ix/zamboanga_sibugay.dart';
+
+// Region-X
+import 'provinces/region-x/bukidnon.dart';
+import 'provinces/region-x/camiguin.dart';
+import 'provinces/region-x/lanao_del_norte.dart';
+import 'provinces/region-x/misamis_occidental.dart';
+import 'provinces/region-x/misamis_oriental.dart';
+
+// Region XI
+import 'provinces/region-xi/davao_de_oro.dart';
+import 'provinces/region-xi/davao_del_norte.dart';
+import 'provinces/region-xi/davao_del_sur.dart';
+import 'provinces/region-xi/davao_occidental.dart';
+import 'provinces/region-xi/davao_oriental.dart';
+
+// Region XII
+import 'provinces/region-xii/cotabato.dart';
+import 'provinces/region-xii/sarangani.dart';
+import 'provinces/region-xii/south_cotabato.dart';
+import 'provinces/region-xii/sultan_kudarat.dart';
+
+// Region XIII
+import 'provinces/region-xiii/agusan_del_norte.dart';
+import 'provinces/region-xiii/agusan_del_sur.dart';
+import 'provinces/region-xiii/dinagat_islands.dart';
+import 'provinces/region-xiii/surigao_del_norte.dart';
+import 'provinces/region-xiii/surigao_del_sur.dart';
+
+// BARMM
+import 'provinces/barmm/basilan.dart';
+import 'provinces/barmm/lanao_del_sur.dart';
+import 'provinces/barmm/maguindanao.dart';
+import 'provinces/barmm/sulu.dart';
+import 'provinces/barmm/tawi_tawi.dart';
 
 void main() {
   runApp(const MyApp());
@@ -318,7 +430,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ];
 
     _zoomPanBehavior = MapZoomPanBehavior(
-      maxZoomLevel: 2.5, // Adjust the zoom level for the map
+      maxZoomLevel: 4.5, // Adjust the zoom level for the map
     );
     _mapData = _getMapData();
     _dataSource = MapShapeSource.asset(
@@ -453,109 +565,112 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
 
                 Expanded(
-                  child: SfMaps(
-                      layers: [
-                        MapShapeLayer(
-                          source: _dataSource,
-                          zoomPanBehavior: _zoomPanBehavior,
-                          showDataLabels: true,
-                          initialMarkersCount: 17,
-                          markerBuilder: (BuildContext context, int index) {
-                            return MapMarker(
-                              latitude: _markerData[index].latitude,
-                              longitude: _markerData[index].longitude,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  if (_markerData[index].country == 'Region X (Northern Mindanao)') {
-                                    _showProvinceDialog(context, 'Region X', region10Provinces);
-                                  } else if (_markerData[index].country == 'Region XI (Davao Region)') {
-                                    _showProvinceDialog(context, 'Region XI', region11Provinces);
-                                  }else if(_markerData[index].country == 'Region IX (Zamboanga Peninsula)') {
-                                    _showProvinceDialog(context, 'Region IX', region9Provinces);
-                                  }else if(_markerData[index].country == 'Region XII (SOCCSKSARGEN)') {
-                                    _showProvinceDialog(context, 'Region XII', region12Provinces);
-                                  } else if(_markerData[index].country == 'Region XIII (Caraga)') {
-                                    _showProvinceDialog(context, 'Region XIII', region13Provinces);
-                                  } else if(_markerData[index].country == 'Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)') {
-                                    _showProvinceDialog(context, 'Bangsamoro Autonomous Region In Muslim Mindanao', barmmProvinces);
-                                  } else if(_markerData[index].country == 'Region VIII (Eastern Visayas)') {
-                                    _showProvinceDialog(context, 'Region VIII', region8Provinces);
-                                  } else if(_markerData[index].country == 'Region VII (Central Visayas)') {
-                                    _showProvinceDialog(context, 'Region VII', region7Provinces);
-                                  } else if(_markerData[index].country == 'Region VI (Western Visayas)') {
-                                    _showProvinceDialog(context, 'Region VI', region6Provinces);
-                                  } else if(_markerData[index].country == 'MIMAROPA Region') {
-                                    _showProvinceDialog(context, 'MIMAROPA Region', mimaropaProvinces);
-                                  } else if(_markerData[index].country == 'Region V (Bicol Region)') {
-                                    _showProvinceDialog(context, 'Region V', region5Provinces);
-                                  } else if(_markerData[index].country == 'Region IV-A (CALABARZON)') {
-                                    _showProvinceDialog(context, 'Region IV', region4Provinces);
-                                  } else if(_markerData[index].country == 'National Capital Region (NCR)') {
-                                    _showProvinceDialog(context, 'National Capital Region', ncrProvinces);
-                                  } else if(_markerData[index].country == 'Region III (Central Luzon)') {
-                                    _showProvinceDialog(context, 'Region III', region3Provinces);
-                                  } else if(_markerData[index].country == 'Region II (Cagayan Valley)') {
-                                    _showProvinceDialog(context, 'Region II', region2Provinces);
-                                  } else if(_markerData[index].country == 'Cordillera Administrative Region (CAR)') {
-                                    _showProvinceDialog(context, 'Cordillera Administrative Region', carProvinces);
-                                  } else if(_markerData[index].country == 'Region I (Ilocos Region)') {
-                                    _showProvinceDialog(context, 'Region I', region1Provinces);
-                                  }
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: _markerData[index].country == 'Region X (Northern Mindanao)'
-                                      ? const Color(0xFF4da2e5)
-                                      : _markerData[index].country == 'Region XI (Davao Region)'
-                                      ? const Color(0xFF00A9E0)
-                                      : _markerData[index].country == 'Region IX (Zamboanga Peninsula)'
-                                      ? const Color(0xFF092e72)
-                                      : _markerData[index].country == 'Region XII (SOCCSKSARGEN)'
-                                      ? const Color(0xFF2375a7)
-                                      : _markerData[index].country == 'Region XIII (Caraga)'
-                                      ? const Color(0xFF1d79ab)
-                                      : _markerData[index].country == 'Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)'
-                                      ? const Color(0xFF2ed4e2)
-                                      : _markerData[index].country == 'Region VIII (Eastern Visayas)'
-                                      ? const Color(0xFF00A9E0)
-                                      : _markerData[index].country == 'Region VII (Central Visayas)'
-                                      ? const Color(0xFF053171)
-                                      : _markerData[index].country == 'Region VI (Western Visayas)'
-                                      ? const Color(0xFF2375a7)
-                                      : _markerData[index].country == 'MIMAROPA Region'
-                                      ? const Color(0xFF17336a)
-                                      : _markerData[index].country == 'Region V (Bicol Region)'
-                                      ? const Color(0xFF2677a6)
-                                      : _markerData[index].country == 'Region IV-A (CALABARZON)'
-                                      ? const Color(0xFF2374a8)
-                                      : _markerData[index].country == 'National Capital Region (NCR)'
-                                      ? const Color(0xFF6fafc4)
-                                      : _markerData[index].country == 'Region III (Central Luzon)'
-                                      ? const Color(0xFF092e72)
-                                      : _markerData[index].country == 'Region II (Cagayan Valley)'
-                                      ? const Color(0xFF356ec8)
-                                      : _markerData[index].country == 'Cordillera Administrative Region (CAR)'
-                                      ? const Color(0xFF38cfe0)
-                                      : _markerData[index].country == 'Region I (Ilocos Region)'
-                                      ? Color(0xFF0087D1)
-                                      : const Color(0xFF4da2e5),  // Default color
-                                  shape: const CircleBorder(),
-                                  padding: const EdgeInsets.all(0),  // Smaller padding for smaller button
-                                  minimumSize: const Size(0, 0),  // Reduce button size
-                                ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                    child: SfMaps(
+                        layers: [
+                          MapShapeLayer(
+                            source: _dataSource,
+                            zoomPanBehavior: _zoomPanBehavior,
+                            showDataLabels: true,
+                            initialMarkersCount: 17,
+                            markerBuilder: (BuildContext context, int index) {
+                              return MapMarker(
+                                latitude: _markerData[index].latitude,
+                                longitude: _markerData[index].longitude,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    if (_markerData[index].country == 'Region X (Northern Mindanao)') {
+                                      _showProvinceDialog(context, 'Region X', region10Provinces);
+                                    } else if (_markerData[index].country == 'Region XI (Davao Region)') {
+                                      _showProvinceDialog(context, 'Region XI', region11Provinces);
+                                    }else if(_markerData[index].country == 'Region IX (Zamboanga Peninsula)') {
+                                      _showProvinceDialog(context, 'Region IX', region9Provinces);
+                                    }else if(_markerData[index].country == 'Region XII (SOCCSKSARGEN)') {
+                                      _showProvinceDialog(context, 'Region XII', region12Provinces);
+                                    } else if(_markerData[index].country == 'Region XIII (Caraga)') {
+                                      _showProvinceDialog(context, 'Region XIII', region13Provinces);
+                                    } else if(_markerData[index].country == 'Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)') {
+                                      _showProvinceDialog(context, 'Bangsamoro Autonomous Region In Muslim Mindanao', barmmProvinces);
+                                    } else if(_markerData[index].country == 'Region VIII (Eastern Visayas)') {
+                                      _showProvinceDialog(context, 'Region VIII', region8Provinces);
+                                    } else if(_markerData[index].country == 'Region VII (Central Visayas)') {
+                                      _showProvinceDialog(context, 'Region VII', region7Provinces);
+                                    } else if(_markerData[index].country == 'Region VI (Western Visayas)') {
+                                      _showProvinceDialog(context, 'Region VI', region6Provinces);
+                                    } else if(_markerData[index].country == 'MIMAROPA Region') {
+                                      _showProvinceDialog(context, 'MIMAROPA Region', mimaropaProvinces);
+                                    } else if(_markerData[index].country == 'Region V (Bicol Region)') {
+                                      _showProvinceDialog(context, 'Region V', region5Provinces);
+                                    } else if(_markerData[index].country == 'Region IV-A (CALABARZON)') {
+                                      _showProvinceDialog(context, 'Region IV', region4Provinces);
+                                    } else if(_markerData[index].country == 'National Capital Region (NCR)') {
+                                      _showProvinceDialog(context, 'National Capital Region', ncrProvinces);
+                                    } else if(_markerData[index].country == 'Region III (Central Luzon)') {
+                                      _showProvinceDialog(context, 'Region III', region3Provinces);
+                                    } else if(_markerData[index].country == 'Region II (Cagayan Valley)') {
+                                      _showProvinceDialog(context, 'Region II', region2Provinces);
+                                    } else if(_markerData[index].country == 'Cordillera Administrative Region (CAR)') {
+                                      _showProvinceDialog(context, 'Cordillera Administrative Region', carProvinces);
+                                    } else if(_markerData[index].country == 'Region I (Ilocos Region)') {
+                                      _showProvinceDialog(context, 'Region I', region1Provinces);
+                                    }
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: _markerData[index].country == 'Region X (Northern Mindanao)'
+                                        ? const Color(0xFF4da2e5)
+                                        : _markerData[index].country == 'Region XI (Davao Region)'
+                                        ? const Color(0xFF00A9E0)
+                                        : _markerData[index].country == 'Region IX (Zamboanga Peninsula)'
+                                        ? const Color(0xFF092e72)
+                                        : _markerData[index].country == 'Region XII (SOCCSKSARGEN)'
+                                        ? const Color(0xFF2375a7)
+                                        : _markerData[index].country == 'Region XIII (Caraga)'
+                                        ? const Color(0xFF1d79ab)
+                                        : _markerData[index].country == 'Bangsamoro Autonomous Region In Muslim Mindanao (BARMM)'
+                                        ? const Color(0xFF2ed4e2)
+                                        : _markerData[index].country == 'Region VIII (Eastern Visayas)'
+                                        ? const Color(0xFF00A9E0)
+                                        : _markerData[index].country == 'Region VII (Central Visayas)'
+                                        ? const Color(0xFF053171)
+                                        : _markerData[index].country == 'Region VI (Western Visayas)'
+                                        ? const Color(0xFF2375a7)
+                                        : _markerData[index].country == 'MIMAROPA Region'
+                                        ? const Color(0xFF17336a)
+                                        : _markerData[index].country == 'Region V (Bicol Region)'
+                                        ? const Color(0xFF2677a6)
+                                        : _markerData[index].country == 'Region IV-A (CALABARZON)'
+                                        ? const Color(0xFF2374a8)
+                                        : _markerData[index].country == 'National Capital Region (NCR)'
+                                        ? const Color(0xFF6fafc4)
+                                        : _markerData[index].country == 'Region III (Central Luzon)'
+                                        ? const Color(0xFF092e72)
+                                        : _markerData[index].country == 'Region II (Cagayan Valley)'
+                                        ? const Color(0xFF356ec8)
+                                        : _markerData[index].country == 'Cordillera Administrative Region (CAR)'
+                                        ? const Color(0xFF38cfe0)
+                                        : _markerData[index].country == 'Region I (Ilocos Region)'
+                                        ? Color(0xFF0087D1)
+                                        : const Color(0xFF4da2e5),  // Default color
+                                    shape: const CircleBorder(),
+                                    padding: const EdgeInsets.all(0),  // Smaller padding for smaller button
+                                    minimumSize: const Size(0, 0),  // Reduce button size
+                                  ),
 
-                                child: const Icon(
-                                  Icons.location_on,
-                                  //Icons.pin_drop,
-                                  color: Colors.white,
-                                  //color: Color(0xFF71b300),
-                                  //size: 24,
+                                  child: const Icon(
+                                    Icons.location_on,
+                                    //Icons.pin_drop,
+                                    color: Colors.white,
+                                    //color: Color(0xFF71b300),
+                                    //size: 24,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
-                      ]
-                  ),
+                              );
+                            },
+                          ),
+                        ]),
+                  )
+
                 ),
 
                 // Footer Container
@@ -627,17 +742,420 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.of(context).pop(); // Close the dialog
 
                         // Navigate to a specific page based on the province name
-                        if (province == 'Lanao del Norte') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => LanaoDelNortePage()),
-                          );
-                        } else if (province == 'Ilocos Norte') {
+
+                        if (province == 'Ilocos Norte') { // Region I
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => IlocosNortePage()),
                           );
+                        } else if (province == 'Ilocos Sur') { // Region I
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => IlocosSurPage()),
+                          );
+                        } else if (province == 'La Union') { // Region I
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LaUnionPage()),
+                          );
+                        } else if (province == 'Pangasinan') { // Region I
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PangasinanPage()),
+                          );
+                        } else if (province == 'Abra') { // CAR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AbraPage()),
+                          );
+                        } else if (province == 'Apayao') { // CAR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ApayaoPage()),
+                          );
+                        } else if (province == 'Benguet') { // CAR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BenguetPage()),
+                          );
+                        } else if (province == 'Ifugao') { // CAR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => IfugaoPage()),
+                          );
+                        } else if (province == 'Kalinga') { // CAR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => KalingaPage()),
+                          );
+                        } else if (province == 'Mountain Province') { // CAR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MountainProvincePage()),
+                          );
+                        } else if (province == 'Batanes') { // Region II
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BatanesPage()),
+                          );
+                        } else if (province == 'Cagayan') { // Region II
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CagayanPage()),
+                          );
+                        } else if (province == 'Isabela') { // Region II
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => IsabelaPage()),
+                          );
+                        } else if (province == 'Nueva Vizcaya') { // Region II
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => NuevaVizcayaPage()),
+                          );
+                        } else if (province == 'Quirino') { // Region II
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => QuirinoPage()),
+                          );
+                        } else if (province == 'Aurora') { // Region III
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AuroraPage()),
+                          );
+                        } else if (province == 'Bataan') { // Region III
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BataanPage()),
+                          );
+                        } else if (province == 'Bulacan') { // Region III
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BulacanPage()),
+                          );
+                        } else if (province == 'Nueva Ecija') { // Region III
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => NuevaEcijaPage()),
+                          );
+                        } else if (province == 'Pampanga') { // Region III
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PampangaPage()),
+                          );
+                        } else if (province == 'Tarlac') { // Region III
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TarlacPage()),
+                          );
+                        } else if (province == 'Zambales') { // Region III
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ZambalesPage()),
+                          );
+                        } else if (province == 'NCR') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => NCRPage()),
+                          );
+                        } else if (province == 'Batangas') { // Region IV
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BatangasPage()),
+                          );
+                        } else if (province == 'Cavite') { // Region IV
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CavitePage()),
+                          );
+                        } else if (province == 'Laguna') { // Region IV
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LagunaPage()),
+                          );
+                        } else if (province == 'Quezon') { // Region IV
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => QuezonPage()),
+                          );
+                        } else if (province == 'Rizal') { // Region IV
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => RizalPage()),
+                          );
+                        } else if (province == 'Albay') { // Region V
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AlbayPage()),
+                          );
+                        } else if (province == 'Camarines Norte') { // Region V
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CamarinesNortePage()),
+                          );
+                        } else if (province == 'Camarines Sur') { // Region V
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CamarinesSurPage()),
+                          );
+                        } else if (province == 'Catanduanes') { // Region V
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CatanduanesPage()),
+                          );
+                        } else if (province == 'Masbate') { // Region V
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MasbatePage()),
+                          );
+                        } else if (province == 'Sorsogon') { // Region V
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SorsogonPage()),
+                          );
+                        } else if (province == 'Marinduque') { // Mimaropa
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MarinduquePage()),
+                          );
+                        } else if (province == 'Occidental Mindoro') { // Mimaropa
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => OccidentalMindoroPage()),
+                          );
+                        } else if (province == 'Oriental Mindoro') { // Mimaropa
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => OrientalMindoroPage()),
+                          );
+                        } else if (province == 'Palawan') { // Mimaropa
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PalawanPage()),
+                          );
+                        } else if (province == 'Romblon') { // Mimaropa
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => RomblonPage()),
+                          );
+                        } else if (province == 'Aklan') { // Region VI
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AklanPage()),
+                          );
+                        } else if (province == 'Antique') { // Region VI
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AntiquePage()),
+                          );
+                        } else if (province == 'Capiz') { // Region VI
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CapizPage()),
+                          );
+                        } else if (province == 'Guimaras') { // Region VI
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => GuimarasPage()),
+                          );
+                        } else if (province == 'Iloilo') { // Region VI
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => IloiloPage()),
+                          );
+                        } else if (province == 'Negros Occidental') { // Region VI
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => NegrosOccidentalPage()),
+                          );
+                        } else if (province == 'Bohol') { // Region VII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BoholPage()),
+                          );
+                        } else if (province == 'Cebu') { // Region VII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CebuPage()),
+                          );
+                        } else if (province == 'Negros Oriental') { // Region VII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => NegrosOrientalPage()),
+                          );
+                        } else if (province == 'Siquijor') { // Region VII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SiquijorPage()),
+                          );
+                        } else if (province == 'Biliran') { // Region VIII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BiliranPage()),
+                          );
+                        } else if (province == 'Eastern Samar') { // Region VIII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => EasternSamarPage()),
+                          );
+                        } else if (province == 'Leyte') { // Region VIII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LeytePage()),
+                          );
+                        } else if (province == 'Northern Samar') { // Region VIII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => NorthernSamarPage()),
+                          );
+                        } else if (province == 'Samar') { // Region VIII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SamarPage()),
+                          );
+                        } else if (province == 'Southern Leyte') { // Region VIII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SouthernLeytePage()),
+                          );
+                        } else if (province == 'Zamboanga del Norte') { // Region IX
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ZamboangaDelNortePage()),
+                          );
+                        } else if (province == 'Zamboanga del Sur') { // Region IX
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ZamboangaDelSurPage()),
+                          );
+                        } else if (province == 'Zamboanga Sibugay') { // Region IX
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ZamboangaSibugayPage()),
+                          );
+                        } else if (province == 'Lanao del Norte') { // Region X
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LanaoDelNortePage()),
+                          );
+                        } else if (province == 'Bukidnon') { // Region X
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BukidnonPage()),
+                          );
+                        } else if (province == 'Camiguin') { // Region X
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CamiguinPage()),
+                          );
+                        } else if (province == 'Misamis Occidental') { // Region X
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MisamisOccidentalPage()),
+                          );
+                        } else if (province == 'Misamis Oriental') { // Region X
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MisamisOrientalPage()),
+                          );
+                        } else if (province == 'Davao de Oro (Compostela Valley)') { // Region XI
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => DavaoDeOroPage()),
+                          );
+                        } else if (province == 'Davao del Norte') { // Region XI
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => DavaoDelNortePage()),
+                          );
+                        } else if (province == 'Davao del Sur') { // Region XI
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => DavaoDelSurPage()),
+                          );
+                        } else if (province == 'Davao Occidental') { // Region XI
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => DavaoOccidentalPage()),
+                          );
+                        } else if (province == 'Davao Oriental') { // Region XI
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => DavaoOrientalPage()),
+                          );
+                        } else if (province == 'Cotabato') { // Region XII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CotabatoPage()),
+                          );
+                        } else if (province == 'Sarangani') { // Region XII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SaranganiPage()),
+                          );
+                        } else if (province == 'South Cotabato') { // Region XII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SouthCotabatoPage()),
+                          );
+                        } else if (province == 'Sultan Kudarat') { // Region XII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SultanKudaratPage()),
+                          );
+                        } else if (province == 'Agusan del Norte') { // Region XIII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AgusanDelNortePage()),
+                          );
+                        } else if (province == 'Agusan del Sur') { // Region XIII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => AgusanDelSurPage()),
+                          );
+                        } else if (province == 'Dinagat Islands') { // Region XIII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => DinagatIslandsPage()),
+                          );
+                        } else if (province == 'Surigao del Norte') { // Region XIII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SurigaoDelNortePage()),
+                          );
+                        } else if (province == 'Surigao del Sur') { // Region XIII
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SurigaoDelSurPage()),
+                          );
+                        } else if (province == 'Basilan') { // BARMM
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BasilanPage()),
+                          );
+                        } else if (province == 'Lanao del Sur') { // BARMM
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => LanaoDelSurPage()),
+                          );
+                        } else if (province == 'Maguindanao') { // BARMM
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MaguindanaoPage()),
+                          );
+                        } else if (province == 'Sulu') { // BARMM
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SuluPage()),
+                          );
+                        } else if (province == 'Tawi‑Tawi') { // BARMM
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TawiTawiPage()),
+                          );
                         }
+
+
                       },
                       child: Text(province),
                     ),
@@ -662,11 +1180,6 @@ class _MyHomePageState extends State<MyHomePage> {
       },
     );
   }
-
-
-
-
-
 
 
   // Map Colors
