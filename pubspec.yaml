@@ -52,10 +52,10 @@ dev_dependencies:
 
 flutter_launcher_icons:
   android: "launcher_icon"
-  image_path: "assets/app-icon/ic_launcher.png"
+  image_path: "assets/app-icon/nstw2024-app-icon.png"
   min_sdk_android: 21 # android min sdk min:16, default 21
   adaptive_icon_background: "#ffffff"
-  adaptive_icon_foreground: "assets/app-icon/ic_launcher.png"
+  adaptive_icon_foreground: "assets/app-icon/nstw2024-app-icon.png"
 
 flutter_app_name:
   name: "DOST NSTW 2024"
@@ -85,6 +85,7 @@ flutter:
     - assets/thumbnails/project1_thumbnail.png
     - assets/images/project1_thumbnail.png
     - assets/images/play_button.png
+    - assets/app-icon/nstw2024-app-icon.png
 
     # Add here the assets for region I project videos and thumbnails
 
