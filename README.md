@@ -18,10 +18,4 @@ DOST NSTW 2024 Mobile Application
 - At least 2 GB of storage  
 
 ## Mobile Dashboard Video Sample
-
-
-
 https://github.com/user-attachments/assets/974ea19d-6bf2-435a-9322-2ca33713c906
-
-
-https://github.com/user-attachments/assets/8ea6e9fa-be01-42c4-b2ea-ea1f81c069d3
