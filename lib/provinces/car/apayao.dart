@@ -18,9 +18,6 @@ class _ApayaoPageState extends State<ApayaoPage> {
     {'project': 'Project 6', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
     {'project': 'Project 7', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
     {'project': 'Project 8', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
-    {'project': 'Project 9', 'video': 'assets/videos/AVP.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
-    {'project': 'Project 10', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
-    {'project': 'Project 11', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
   ];
 
   @override
