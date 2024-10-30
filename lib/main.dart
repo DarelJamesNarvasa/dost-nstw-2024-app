@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 import 'buttons/legend_popup.dart';
 
@@ -409,6 +410,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     // Marker coordinates
     _markerData = const <MarkerModel>[
       MarkerModel('Region I (Ilocos Region)', 18.3053757, 120.7710129),

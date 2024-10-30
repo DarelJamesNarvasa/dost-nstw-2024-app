@@ -116,8 +116,8 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     _controller.dispose();
 
     // Restore system UI overlays when leaving full-screen mode
-    //SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);dry
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+    //SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+    //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
     super.dispose();
   }
