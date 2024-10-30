@@ -56,7 +56,8 @@ class _SaranganiPageState extends State<SaranganiPage> {
             ),
             const SizedBox(height: 20),
             Expanded(
-              child: CarouselSlider.builder(
+              child: projectVideos.length > 1
+                  ? CarouselSlider.builder(
                 itemCount: projectVideos.length,
                 itemBuilder: (BuildContext context, int index, int realIndex) {
                   final projectName = projectVideos[index]['project']!;
@@ -65,7 +66,7 @@ class _SaranganiPageState extends State<SaranganiPage> {
                   return _carouselItem(projectName, videoPath, thumbnailPath);
                 },
                 options: CarouselOptions(
-                  height: 400.0,
+                  height: 500.0,
                   enlargeCenterPage: true,
                   autoPlay: true,
                   aspectRatio: 16 / 9,
@@ -73,6 +74,17 @@ class _SaranganiPageState extends State<SaranganiPage> {
                   enableInfiniteScroll: true,
                   autoPlayAnimationDuration: Duration(milliseconds: 800),
                   viewportFraction: 0.8,
+                ),
+              )
+                  : Center(
+                child: SizedBox(
+                  height: 500.0, // Same height as the CarouselSlider
+                  width: MediaQuery.of(context).size.width * 0.8, // Matches viewportFraction
+                  child: _carouselItem(
+                    projectVideos[0]['project']!,
+                    projectVideos[0]['video']!,
+                    projectVideos[0]['thumbnail']!,
+                  ),
                 ),
               ),
             ),

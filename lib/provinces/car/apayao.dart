@@ -11,13 +11,6 @@ class ApayaoPage extends StatefulWidget {
 class _ApayaoPageState extends State<ApayaoPage> {
   final List<Map<String, String>> projectVideos = [
     {'project': 'Project 1', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
-    {'project': 'Project 2', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
-    {'project': 'Project 3', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
-    {'project': 'Project 4', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
-    {'project': 'Project 5', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
-    {'project': 'Project 6', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
-    {'project': 'Project 7', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
-    {'project': 'Project 8', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
   ];
 
   @override
@@ -57,7 +50,8 @@ class _ApayaoPageState extends State<ApayaoPage> {
             ),
             const SizedBox(height: 20),
             Expanded(
-              child: CarouselSlider.builder(
+              child: projectVideos.length > 1
+                  ? CarouselSlider.builder(
                 itemCount: projectVideos.length,
                 itemBuilder: (BuildContext context, int index, int realIndex) {
                   final projectName = projectVideos[index]['project']!;
@@ -66,7 +60,7 @@ class _ApayaoPageState extends State<ApayaoPage> {
                   return _carouselItem(projectName, videoPath, thumbnailPath);
                 },
                 options: CarouselOptions(
-                  height: 400.0,
+                  height: 500.0,
                   enlargeCenterPage: true,
                   autoPlay: true,
                   aspectRatio: 16 / 9,
@@ -74,6 +68,17 @@ class _ApayaoPageState extends State<ApayaoPage> {
                   enableInfiniteScroll: true,
                   autoPlayAnimationDuration: Duration(milliseconds: 800),
                   viewportFraction: 0.8,
+                ),
+              )
+                  : Center(
+                child: SizedBox(
+                  height: 500.0, // Same height as the CarouselSlider
+                  width: MediaQuery.of(context).size.width * 0.8, // Matches viewportFraction
+                  child: _carouselItem(
+                    projectVideos[0]['project']!,
+                    projectVideos[0]['video']!,
+                    projectVideos[0]['thumbnail']!,
+                  ),
                 ),
               ),
             ),
