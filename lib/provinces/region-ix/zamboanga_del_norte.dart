@@ -9,7 +9,11 @@ class ZamboangaDelNortePage extends StatefulWidget {
 
 class _ZamboangaDelNortePageState extends State<ZamboangaDelNortePage> {
   final List<Map<String, String>> projectVideos = [
-    {'project': 'Project 1', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
+    {
+      'project': 'Project 1',
+      'video': 'assets/videos/1_minute_DOST-X.mp4',
+      'thumbnail': 'assets/images/project1_thumbnail.png'
+    },
   ];
 
   @override
