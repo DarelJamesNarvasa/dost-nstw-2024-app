@@ -1,13 +1,3 @@
-import 'package:dost_mobile_apps/provinces/ncr/brgy_bagong_silangan_quezon_city.dart';
-import 'package:dost_mobile_apps/provinces/ncr/caloocan_city.dart';
-import 'package:dost_mobile_apps/provinces/ncr/city_of_manila.dart';
-import 'package:dost_mobile_apps/provinces/ncr/marikina_city.dart';
-import 'package:dost_mobile_apps/provinces/ncr/municipality_of_pateros.dart';
-import 'package:dost_mobile_apps/provinces/ncr/muntinlupa_city.dart';
-import 'package:dost_mobile_apps/provinces/ncr/pasay_city.dart';
-import 'package:dost_mobile_apps/provinces/ncr/pasig_city.dart';
-import 'package:dost_mobile_apps/provinces/ncr/taguing_city.dart';
-import 'package:dost_mobile_apps/provinces/ncr/valenzuela_city.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
@@ -46,6 +36,16 @@ import 'provinces/region-iii/zambales.dart';
 
 // NCR
 import 'provinces/ncr/ncr.dart';
+import 'package:dost_mobile_apps/provinces/ncr/brgy_bagong_silangan_quezon_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/caloocan_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/city_of_manila.dart';
+import 'package:dost_mobile_apps/provinces/ncr/marikina_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/municipality_of_pateros.dart';
+import 'package:dost_mobile_apps/provinces/ncr/muntinlupa_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/pasay_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/pasig_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/taguing_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/valenzuela_city.dart';
 
 // Region IV
 import 'provinces/region-iv/batangas.dart';
