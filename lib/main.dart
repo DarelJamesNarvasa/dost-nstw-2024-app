@@ -1,9 +1,20 @@
+import 'package:dost_mobile_apps/provinces/ncr/brgy_bagong_silangan_quezon_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/caloocan_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/city_of_manila.dart';
+import 'package:dost_mobile_apps/provinces/ncr/marikina_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/municipality_of_pateros.dart';
+import 'package:dost_mobile_apps/provinces/ncr/muntinlupa_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/pasay_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/pasig_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/taguing_city.dart';
+import 'package:dost_mobile_apps/provinces/ncr/valenzuela_city.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 import 'buttons/legend_popup.dart';
 
 // Region-I
+import 'provinces/ncr/mandaluyong_city.dart';
 import 'provinces/region-i/ilocos_norte.dart';
 import 'provinces/region-i/ilocos_sur.dart';
 import 'provinces/region-i/la_union.dart';
@@ -215,7 +226,19 @@ class _MyHomePageState extends State<MyHomePage> {
   ];
 
   final List<String> ncrProvinces = [
-    'NCR'
+    //'NCR',
+    'Brgy. Bagong Silangan, Quezon City',
+    'Caloocan City',
+    'City of Manila',
+    'DRRMO in NCR'
+    'Mandaluyong City',
+    'Marikina City',
+    'Municipality of Pateros',
+    'Muntinlupa City',
+    'Pasay City',
+    'Pasig City',
+    'Taguig City',
+    'Valenzuela City',
   ];
 
   final List<String> region4Provinces = [
@@ -890,10 +913,65 @@ class _MyHomePageState extends State<MyHomePage> {
                             context,
                             MaterialPageRoute(builder: (context) => ZambalesPage()),
                           );
-                        } else if (province == 'NCR') { // NCR
+                        } else if (province == 'Brgy. Bagong Silangan, Quezon City') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => BrgyBagongSilanganQuezonCityPage()),
+                          );
+                        } else if (province == 'Caloocan City') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CaloocanCityPage()),
+                          );
+                        } else if (province == 'City of Manila') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CityOfManilaPage()),
+                          );
+                        } else if (province == 'DRRMO in NCR') { // NCR
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => NCRPage()),
+                          );
+                        } else if (province == 'Mandaluyong City') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MandaluyongCityPage()),
+                          );
+                        } else if (province == 'Marikina City') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MarikinaCityPage()),
+                          );
+                        } else if (province == 'Municipality of Pateros') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MunicipalityOfPaterosPage()),
+                          );
+                        } else if (province == 'Muntinlupa City') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MuntinlupaCityPage()),
+                          );
+                        } else if (province == 'Pasay City') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PasayCityPage()),
+                          );
+                        } else if (province == 'Pasig City') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PasigCityPage()),
+                          );
+                        } else if (province == 'Taguig City') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => TaguingCityPage()),
+                          );
+                        } else if (province == 'Valenzuela City') { // NCR
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ValenzuelaCityPage()),
                           );
                         } else if (province == 'Batangas') { // Region IV
                           Navigator.push(
