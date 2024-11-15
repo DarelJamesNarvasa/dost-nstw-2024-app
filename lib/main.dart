@@ -4,7 +4,6 @@ import 'package:syncfusion_flutter_maps/maps.dart';
 import 'buttons/legend_popup.dart';
 
 // Region-I
-import 'provinces/ncr/mandaluyong_city.dart';
 import 'provinces/region-i/ilocos_norte.dart';
 import 'provinces/region-i/ilocos_sur.dart';
 import 'provinces/region-i/la_union.dart';
