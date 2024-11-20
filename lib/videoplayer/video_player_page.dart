@@ -35,7 +35,13 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     _controller.addListener(() {
       if (_controller.value.position == _controller.value.duration && !_isDialogVisible) {
         _isDialogVisible = true;
-        _showVideoEndDialog();
+        //_showVideoEndDialog();
+
+        // pop up yes/no button solution
+        Future.delayed(const Duration(seconds: 1), () {
+          if (mounted) _showVideoEndDialog();
+        });
+
       }
     });
   }
