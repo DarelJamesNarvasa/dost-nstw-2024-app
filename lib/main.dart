@@ -527,7 +527,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Transform.translate(
                               offset: Offset(0, -12),
                               child: Image.asset(
-                                'assets/logo/DOST_Logo.png',
+                                'assets/logo/bagong-pilipnas-logo.png',
                                 width: 50,
                                 height: 50,
                               ),
@@ -553,7 +553,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             Transform.translate(
                               offset: Offset(0, -12),
                               child: Image.asset(
-                                'assets/logo/bagong-pilipnas-logo.png',
+                                'assets/logo/DOST_Logo.png',
                                 width: 55,
                                 height: 55,
                               ),

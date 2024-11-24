@@ -66,6 +66,7 @@ class _AntiquePageState extends State<AntiquePage> {
                   height: 600.0,
                   enlargeCenterPage: true,
                   autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 30),
                   aspectRatio: 16 / 9,
                   autoPlayCurve: Curves.fastOutSlowIn,
                   enableInfiniteScroll: true,

@@ -9,7 +9,11 @@ class CamarinesNortePage extends StatefulWidget {
 
 class _CamarinesNortePageState extends State<CamarinesNortePage> {
   final List<Map<String, String>> projectVideos = [
-    {'project': 'Project 1', 'video': 'assets/videos/1_minute_DOST-X.mp4', 'thumbnail': 'assets/images/project1_thumbnail.png'},
+    {
+      'project': 'Project 1',
+      'video': 'assets/videos/1_minute_DOST-X.mp4',
+      'thumbnail': 'assets/images/project1_thumbnail.png'
+    },
   ];
 
   @override
@@ -62,6 +66,7 @@ class _CamarinesNortePageState extends State<CamarinesNortePage> {
                   height: 600.0,
                   enlargeCenterPage: true,
                   autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 30),
                   aspectRatio: 16 / 9,
                   autoPlayCurve: Curves.fastOutSlowIn,
                   enableInfiniteScroll: true,

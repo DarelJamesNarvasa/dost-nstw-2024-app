@@ -63,9 +63,10 @@ class _ZamboangaDelNortePageState extends State<ZamboangaDelNortePage> {
                   return _carouselItem(projectName, videoPath, thumbnailPath);
                 },
                 options: CarouselOptions(
-                  height: 500.0,
+                  height: 600.0,
                   enlargeCenterPage: true,
                   autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 30),
                   aspectRatio: 16 / 9,
                   autoPlayCurve: Curves.fastOutSlowIn,
                   enableInfiniteScroll: true,
@@ -75,7 +76,7 @@ class _ZamboangaDelNortePageState extends State<ZamboangaDelNortePage> {
               )
                   : Center(
                 child: SizedBox(
-                  height: 500.0, // Same height as the CarouselSlider
+                  height: 600.0, // Same height as the CarouselSlider
                   width: MediaQuery.of(context).size.width * 0.8, // Matches viewportFraction
                   child: _carouselItem(
                     projectVideos[0]['project']!,

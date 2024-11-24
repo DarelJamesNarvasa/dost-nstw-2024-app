@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import '../../videoplayer/video_player_page.dart';
 
-
 class BukidnonPage extends StatefulWidget {
   @override
   _BukidnonPageState createState() => _BukidnonPageState();
@@ -67,6 +66,7 @@ class _BukidnonPageState extends State<BukidnonPage> {
                   height: 600.0,
                   enlargeCenterPage: true,
                   autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 30),
                   aspectRatio: 16 / 9,
                   autoPlayCurve: Curves.fastOutSlowIn,
                   enableInfiniteScroll: true,
